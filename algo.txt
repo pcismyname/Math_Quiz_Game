@@ -1,0 +1,10 @@
+ client           		server
+----------------------------------------------------------
+1				server send equation
+2 client receive and display equation
+3 client send user answer 
+4				server receive user answer
+5				server send right/wrong
+6 client receive right/wrong
+
+-----------------NEXT QUESTION----------------------------
