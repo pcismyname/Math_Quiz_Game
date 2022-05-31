@@ -1,1 +1,1 @@
-[:-1])
+score_board

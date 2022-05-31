@@ -37,41 +37,32 @@ def start_game():
                     font="Times 15 bold",justify="center",anchor=N)
        
 
-        no = 1
-        print("question number", no)
-
-        data = new_equation()
-        canvas_main.create_text(80, 100+(no)*25, text=f"Q.{no} answer is {round(eval(data),2)}", fill="#BDF2F2",
-                    font="Times 15 bold",justify="center",anchor=N)
-        client.send(data.encode()+str(no).encode())
-        
-        ans = (client.recv(2048).decode())
-    
-        
-        if eval(ans) == round(eval(data),2):
-            client.send("correct".encode())
-        else :
-            client.send("wrong".encode())
-        
-        print(client.recv(2048).decode())
-                  
+        no = 0
+        score = 0    
         while no < 5:
-            
+            count += 1
             no += 1
             print("question number", no)
             data = new_equation()
             client.send(data.encode()+str(no).encode())
 
-            canvas_main.create_text(80, 100+(no)*25, text=f"Q.{no} answer is {round(eval(data),2)}", fill="#BDF2F2",
+            canvas_main.create_text(80, 100+(count)*25, text=f"Q.{no} answer is {round(eval(data),2)}", fill="#BDF2F2",
                     font="Times 15 bold",justify="center",anchor=N)
 
             ans = (client.recv(2048).decode())
 
-
-            if eval(ans) == round(eval(data),2):
-                client.send("correct".encode())
-            else :
-                client.send("wrong".encode())
+            if no == 5:
+                if eval(ans) == round(eval(data),2):
+                    score += 1
+                    client.send(str(score).encode()+"CORRECT".encode())
+                else :
+                    client.send(str(score).encode()+"WRONG".encode())
+            else:   
+                if eval(ans) == round(eval(data),2):
+                    client.send("CORRECT".encode())
+                    score += 1
+                else :
+                    client.send("WRONG".encode())
             
             print(client.recv(2048).decode())
 
