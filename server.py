@@ -17,7 +17,7 @@ def stop_server():
 
 
 def new_equation():
-    question = str(random.randint(1,9)) #equation start with number
+    question = str(random.randint(1,9)) 
     operands = random.randint(2,4)
     operators =  ['+', '-', '*', '/']
     for i in range(operands-1):
